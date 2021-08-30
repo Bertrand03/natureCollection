@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         // Je pars donc de R pour trouver mon id, qui ici, s'appelle fragment_container (dans "activity_main.xml")
         // Et je le remplace par le fragment qui se trouve dans HomeFragment avec l'appel de méthode "onCreateView())
         transaction.replace(R.id.fragment_container, HomeFragment())
-        // Permet de ne pas avoir de retour sur ce composant
+        // Permet de ne pas avoir de retour sur ce composant.
         transaction.addToBackStack(null)
         transaction.commit()
     }
