@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--Permet de faire le design pour une plante-->
+    <!--android:layout_width="match_parent" pour prendre toute la page (idem pour height)-->
+
+    <!-- Code ci-dessous permet de créer un modèle d'image que l'on veut insérer en boucle
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/trending1"
+        /> -->
+
+    <!--L'id va permettre de faire le lien avec mon ViewHolder dans "PlantAdapter"-->
+    <ImageView
+
+        android:id="@+id/image_item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/trending1"
+        />
+</LinearLayout>

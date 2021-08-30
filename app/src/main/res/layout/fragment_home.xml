@@ -3,23 +3,18 @@
 <!--Ici c'est un layout de type LinearLayout pour pouvoir afficher des images en ligne-->
 <!--Ce fragment est une partie de page, il sera rassemblé avec d'autres fragments dans le package "fragments" -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:layout_width="150dp"
-        android:layout_height="200dp"
-        android:src="@drawable/trending1"/>
-
-    <ImageView
-        android:layout_width="150dp"
-        android:layout_height="200dp"
-        android:src="@drawable/trending2"/>
-
-    <ImageView
-        android:layout_width="150dp"
-        android:layout_height="200dp"
-        android:src="@drawable/trending3"/>
+    <!--Permet de boucler pour afficher nos plantes, une plante se trouve dans une vue, on boucle plusieurs vues-->
+   <androidx.recyclerview.widget.RecyclerView
+       android:id="@+id/horizontal_recycler_view"
+       android:layout_width="match_parent"
+       android:layout_height="250dp"
+       android:orientation="horizontal"
+       app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+       />
 
 </LinearLayout>
