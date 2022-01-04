@@ -9,7 +9,7 @@ import fr.drako.naturecollection.R
 
 // C'est cette classe qu'on va donner au RecyclerView pour pouvoir adapter pour chaque plante son équivalent en image
 // RecyclerView et notre classe maitresse, elle utilise la classe Adapter en lui préciseant le type de classe utilisée soit PlantAdapter.ViewHolder. ViewHolder est bien à l'intérieur de ma classe PlantAdapter
-class PlantAdapter : RecyclerView.Adapter<PlantAdapter.ViewHolder>(){
+class PlantAdapter (private val layoutId: Int): RecyclerView.Adapter<PlantAdapter.ViewHolder>(){
 
     // Va permettre de porter la vue, de faire une sorte de boite à composants.
     // Boite pour ranger tous les composants à controler
@@ -24,7 +24,7 @@ class PlantAdapter : RecyclerView.Adapter<PlantAdapter.ViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =  LayoutInflater
             .from(parent.context)
-            .inflate(R.layout.item_horizontal_plant, parent, false)
+            .inflate(layoutId, parent, false)
         return ViewHolder(view)
     }
 

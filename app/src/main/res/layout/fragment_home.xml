@@ -25,6 +25,16 @@
         android:layout_marginTop="@dimen/default_margin"
         android:layout_marginLeft="@dimen/default_margin"
         style="@style/SubtitleTextStyle"
-        android:textColor="@color/white"
+        />
+
+<!--    Liste d'items verticaux-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/vertical_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/default_margin"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         />
 </LinearLayout>
