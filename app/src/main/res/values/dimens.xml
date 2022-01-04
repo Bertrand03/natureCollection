@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--Sert à préciser certaines valeurs pour pouvoir les ré-utiliser dans notre activity_main-->
 <resources>
-    <dimen name="defaul_margin">20dp</dimen>
+    <dimen name="default_margin">20dp</dimen>
+    <dimen name="item_margin">10dp</dimen>
 </resources>

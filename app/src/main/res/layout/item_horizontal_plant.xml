@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<!--On change la balise LinearLayout par une CardView pour pouvoir y insérer plus de choses
+et pouvoir faire des bordures par exemple-->
+<!--cardCornerRadius permet d'arrondir les bords de l'image-->
+<!--cardElevation donne un effet d'ombre-->
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="150dp"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="@dimen/default_margin"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="5dp">
 
     <!--Permet de faire le design pour une plante-->
     <!--android:layout_width="match_parent" pour prendre toute la page (idem pour height)-->
@@ -16,10 +25,9 @@
 
     <!--L'id va permettre de faire le lien avec mon ViewHolder dans "PlantAdapter"-->
     <ImageView
-
         android:id="@+id/image_item"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/trending1"
-        />
-</LinearLayout>
+        android:layout_width="188dp"
+        android:layout_height="236dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/trending1" />
+</androidx.cardview.widget.CardView>
