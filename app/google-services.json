@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "353621931873",
+    "project_id": "naturecollection-eabeb",
+    "storage_bucket": "naturecollection-eabeb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:353621931873:android:9abcf108ea3c5b75a23720",
+        "android_client_info": {
+          "package_name": "fr.drako.naturecollection"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "353621931873-g2vjk5b0dt630810lp2f7909lpqv1bvs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-44NGYa3LKJX91gq8vtlO6tCSu4pWiC0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "353621931873-g2vjk5b0dt630810lp2f7909lpqv1bvs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
