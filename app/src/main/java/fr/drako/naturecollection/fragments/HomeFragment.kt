@@ -48,7 +48,7 @@ class HomeFragment (private val context: MainActivity): Fragment() { // récupé
                 "Cactus",
                 "ça pique beaucoup",
                 "https://cdn.pixabay.com/photo/2016/07/06/20/47/prickly-pear-1501307_960_720.jpg",
-                false
+                true
             ))
 
         // enregistrer une quatrieme plante dans notre liste (tulipe)

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import fr.drako.naturecollection.MainActivity
@@ -23,6 +24,9 @@ class PlantAdapter (private val context: MainActivity,
     class ViewHolder(view : View) : RecyclerView.ViewHolder(view){
         // image de la plante
         val plantImage = view.findViewById<ImageView>(R.id.image_item)
+        val plantName:TextView? = view.findViewById(R.id.name_item) // "?" mis pour dire qu'il faut qu'il tente de récupérer le texte. Si pas possible, ne change pas le texte. "Si le composant est null ne change pas son texte"
+        val plantDescription:TextView? = view.findViewById(R.id.description_item)
+        val starIcon = view.findViewById<ImageView>(R.id.star_icon)
 
     }
 
@@ -44,6 +48,20 @@ class PlantAdapter (private val context: MainActivity,
         // comme le num de version, les informations spécifiques de l'activité etc...
 //        Pour récupérer ce context on va devoir faire un passage de la MainActivity (qui contient ce context) pour passer ces informations d'une classe à une autre
         Glide.with(context).load(Uri.parse(currentPlant.imageUrl)).into(holder.plantImage) // Glide va jouer son rôle de générateur d'images à partir du context. On charge une image à partir d'un lien
+
+        // Mettre à jour le nom de la plante (utiliser le nom de la plante au lieu du nom générique donné pour l'exemple)
+        holder.plantName?.text = currentPlant.name
+
+        // Mettre à jour la description de la plante (utiliser le nom de la plante au lieu du nom générique donné pour l'exemple)
+        holder.plantDescription?.text = currentPlant.description
+
+        // Vérifier si la plante a été likée ou non
+        if (currentPlant.liked) {
+            holder.starIcon.setImageResource(R.drawable.ic_star)
+        } else {
+            holder.starIcon.setImageResource(R.drawable.ic_unstar)
+        }
+
     }
 
     // Permet de renvoyer combien d'item on veut afficher dynamiquement
