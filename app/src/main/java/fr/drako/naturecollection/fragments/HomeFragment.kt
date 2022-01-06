@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import fr.drako.naturecollection.MainActivity
 import fr.drako.naturecollection.PlantModel
+import fr.drako.naturecollection.PlantRepository.Singleton.plantList
 import fr.drako.naturecollection.R
 import fr.drako.naturecollection.adapter.PlantAdapter
 import fr.drako.naturecollection.adapter.PlantItemDecoration
@@ -20,47 +21,50 @@ class HomeFragment (private val context: MainActivity): Fragment() { // récupé
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater?.inflate(R.layout.fragment_home, container, false)
 
-        // créer une liste qui va stocker ces plantes
-        val plantList = arrayListOf<PlantModel>()
+        // ***** METHODE POUR AVOIR DES PLANTES EN DUR *****
+        // créer une liste qui va stocker ces plantes. On a utilisé cette méhode au début pour avoir des valeurs en dur, le temps de configurer la bdd Firebase
+//        val plantList = arrayListOf<PlantModel>()
 
         // enregistrer une première plante dans notre liste (pissenlit)
         // On instancie une classe de plante que l'on veut créer
-        plantList.add(
-            PlantModel(
-            "Pissenlit",
-            "jaune soleil",
-            "https://cdn.pixabay.com/photo/2014/05/01/17/51/flower-335662_960_720.jpg",
-            false
-        ))
-
-        // enregistrer une deuxième plante dans notre liste (rose)
-        plantList.add(
-            PlantModel(
-                "Rose",
-                "ça pique un peu",
-                "https://cdn.pixabay.com/photo/2018/05/16/22/27/rose-3407234_960_720.jpg",
-                false
-            ))
-
-        // enregistrer une troisième plante dans notre liste (cactus)
-        plantList.add(
-            PlantModel(
-                "Cactus",
-                "ça pique beaucoup",
-                "https://cdn.pixabay.com/photo/2016/07/06/20/47/prickly-pear-1501307_960_720.jpg",
-                true
-            ))
-
-        // enregistrer une quatrieme plante dans notre liste (tulipe)
-        plantList.add(
-            PlantModel(
-                "Tulipe",
-                "c'est beau",
-                "https://cdn.pixabay.com/photo/2017/03/13/21/19/tulip-2141216_960_720.jpg",
-                false
-            ))
+//        plantList.add(
+//            PlantModel(
+//            "Pissenlit",
+//            "jaune soleil",
+//            "https://cdn.pixabay.com/photo/2014/05/01/17/51/flower-335662_960_720.jpg",
+//            false
+//        ))
+//
+//        // enregistrer une deuxième plante dans notre liste (rose)
+//        plantList.add(
+//            PlantModel(
+//                "Rose",
+//                "ça pique un peu",
+//                "https://cdn.pixabay.com/photo/2018/05/16/22/27/rose-3407234_960_720.jpg",
+//                false
+//            ))
+//
+//        // enregistrer une troisième plante dans notre liste (cactus)
+//        plantList.add(
+//            PlantModel(
+//                "Cactus",
+//                "ça pique beaucoup",
+//                "https://cdn.pixabay.com/photo/2016/07/06/20/47/prickly-pear-1501307_960_720.jpg",
+//                true
+//            ))
+//
+//        // enregistrer une quatrieme plante dans notre liste (tulipe)
+//        plantList.add(
+//            PlantModel(
+//                "Tulipe",
+//                "c'est beau",
+//                "https://cdn.pixabay.com/photo/2017/03/13/21/19/tulip-2141216_960_720.jpg",
+//                false
+//            ))
+        // ***** FIN METHODE POUR AVOIR DES PLANTES EN DUR *****
 
         // Récupérer le recyclerView - affichage horizontal
+        // Le plantList était initialement utilisé pour les valeurs en dur mais maintenant on passe par le Singleton (Il faut bien penser à importer le plantList qui correspond au Singleton)
         val horizontalRecyclerView = view.findViewById<RecyclerView>(R.id.horizontal_recycler_view)
         horizontalRecyclerView.adapter = PlantAdapter(context, plantList, R.layout.item_horizontal_plant) // On récupère le context pour charger les images via Glide
 

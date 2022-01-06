@@ -9,6 +9,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Charger notre plantRepository (On l'instancie)
+        val repo = PlantRepository()
+
+        // Mettre à jour la liste de plantes
+        // Déclaration du callback d'instructions à faire après que les données aient été récupérées
+        repo.updateData {
+
+        }
+
         // injecter le fragment dans notre boite (fragment_container)
         // supportFragmentManager permet de gérer les fragments
         val transaction = supportFragmentManager.beginTransaction()
