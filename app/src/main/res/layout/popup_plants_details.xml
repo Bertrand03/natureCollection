@@ -1,6 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="360dp"
+    android:layout_height="500dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- On va définir la pop up qui va renvoyer les détails d'une plante quand on va cliquer dessus
+    Ma card view représente l'espace total de cette pop up-->
+    <!-- cardCornerRadius pour l'arrondi
+        cardElevation pour l'ombre derrière-->
+    <!-- Ne pas oublier que pour ce layout de type constraintLayout il faut lui définir des contraintes par rapport à notre page globale
+        Quand je vais tirer le point bleu en haut de mon image pour le mettre tout en haut de ma page je vais avoir un layout_constraintTop_toTopOf
+        qui va apparaitre. Une fois que j'aurai mis toutes les contraintes ma balise androidx.cardview.widget.CardView n'aura plus d'erreur
+        vidéo du tuto à 2:40:02-->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Dans ma card view je délare mon image en petit, située en haut à gauche de ma card view-->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/trending1" />
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/popup_plant_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/popup_plant_name"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView"
+        app:layout_constraintStart_toEndOf="@+id/cardView"
+        app:layout_constraintTop_toTopOf="@+id/cardView"
+        android:layout_marginLeft="@dimen/default_margin"
+        style="@style/TitleTextStyle"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
