@@ -7,6 +7,7 @@ package fr.drako.naturecollection
 class PlantModel (
     // val pour valeur que l'on attribue. valeur fixe ?
     // var pour pouvoir changer la valeur, ici c'est pour montrer si la plante a été liké ou pas (logo étoile)
+    val id: String = "plant0",
     val name: String = "Tulipe",
     val description: String = "Petite description",
     val imageUrl: String = "http://graven.yt/plante.jpg",

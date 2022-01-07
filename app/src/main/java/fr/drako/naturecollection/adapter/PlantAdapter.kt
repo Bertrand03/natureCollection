@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import fr.drako.naturecollection.MainActivity
 import fr.drako.naturecollection.PlantModel
+import fr.drako.naturecollection.PlantRepository
 import fr.drako.naturecollection.R
 
 // C'est cette classe qu'on va donner au RecyclerView pour pouvoir adapter pour chaque plante son équivalent en image
@@ -43,6 +44,9 @@ class PlantAdapter (private val context: MainActivity,
         // récupérer les informations de la plante qui a la position définie
         val currentPlant = plantList[position]
 
+        // Récupérer le repository
+        val repo = PlantRepository()
+
         // utiliser Glide pour récupérer l'image à partir de son lien -> composant
         // le context c'est une sorte de base de données interne qui va contenir toutes les informations contextuelles de l'application
         // comme le num de version, les informations spécifiques de l'activité etc...
@@ -60,6 +64,15 @@ class PlantAdapter (private val context: MainActivity,
             holder.starIcon.setImageResource(R.drawable.ic_star)
         } else {
             holder.starIcon.setImageResource(R.drawable.ic_unstar)
+        }
+
+        // Rajouter une interaction sur cette étoile pour pouvoir liker
+        holder.starIcon.setOnClickListener{
+            // inverse si le bouton est déja liké ou non. On peut définir la valeur contraire juste en mettant le ! devant la valeur
+            currentPlant.liked = !currentPlant.liked
+
+//          Mettre à jour l'objet plante
+            repo.updatePlant(currentPlant)
         }
 
     }

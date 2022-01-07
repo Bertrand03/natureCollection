@@ -49,4 +49,9 @@ class PlantRepository {
         })
     }
 
+    // Mettre à jour un objet plante en bdd. Auparavant on aura attribué un id à chaque plante en base
+    fun updatePlant(plant: PlantModel) {
+        databaseRef.child(plant.id).setValue(plant)
+    }
+
 }
