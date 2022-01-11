@@ -54,4 +54,7 @@ class PlantRepository {
         databaseRef.child(plant.id).setValue(plant)
     }
 
+    // Supprimer une plante de la base. Après la suppression il y a un rafraichissement automatique (grace à Firebase ?)
+    fun deletePlant(plant: PlantModel) = databaseRef.child(plant.id).removeValue()
+
 }
