@@ -8,16 +8,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import fr.drako.naturecollection.MainActivity
-import fr.drako.naturecollection.PlantModel
-import fr.drako.naturecollection.PlantRepository
-import fr.drako.naturecollection.R
+import fr.drako.naturecollection.*
 
 // C'est cette classe qu'on va donner au RecyclerView pour pouvoir adapter pour chaque plante son équivalent en image
 // RecyclerView et notre classe maitresse, elle utilise la classe Adapter en lui préciseant le type de classe utilisée soit PlantAdapter.ViewHolder. ViewHolder est bien à l'intérieur de ma classe PlantAdapter
-class PlantAdapter (private val context: MainActivity,
-                    private val plantList: List<PlantModel>,
-                    private val layoutId: Int): RecyclerView.Adapter<PlantAdapter.ViewHolder>(){
+class PlantAdapter (
+    val context: MainActivity,
+    private val plantList: List<PlantModel>,
+    private val layoutId: Int): RecyclerView.Adapter<PlantAdapter.ViewHolder>(){
 
     // Va permettre de porter la vue, de faire une sorte de boite à composants.
     // Boite pour ranger tous les composants à controler
@@ -75,6 +73,12 @@ class PlantAdapter (private val context: MainActivity,
             repo.updatePlant(currentPlant)
         }
 
+        // Interaction lors d'un clic sur une plante (gestion des pop up) tuto à 03:02:44
+        holder.itemView.setOnClickListener {
+            // Lorsqu'on clic sur l'item on va afficher la pop up
+            // On créée la pop up en lui passant le context de l'adapter et on l'affiche
+            PlantPopup(this, currentPlant).show()
+        }
     }
 
     // Permet de renvoyer combien d'item on veut afficher dynamiquement

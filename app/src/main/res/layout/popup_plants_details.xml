@@ -25,6 +25,7 @@
 
         <!-- Dans ma card view je délare mon image en petit, située en haut à gauche de ma card view-->
         <ImageView
+            android:id="@+id/image_item"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
