@@ -51,7 +51,7 @@ class PlantPopup(private val adapter: PlantAdapter,
 
         // Quand on va cliquer sur une plante il faut que ça mette à jour le like en base.
         // Attention, sans la methode updateStar il n'y aura pas de changement dynamique dans la pop up puisque les instructions se font à la création de la pop up
-        // updateStar sert donc à rafraichir avec les changements que l'on vient de faire en base
+        // updateStar sert donc à rafraichir avec les changements que l'on vient de faire en base.
         starButton.setOnClickListener {
             currentPlant.liked = !currentPlant.liked
             val repo = PlantRepository()
