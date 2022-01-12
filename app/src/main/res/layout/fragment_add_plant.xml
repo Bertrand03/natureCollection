@@ -11,7 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <!-- Bouton pour charger l'image -->
         <Button
+            android:id="@+id/upload_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/add_plant_page_upload_button"
@@ -23,6 +25,7 @@
 
         <!-- On utilise un match parent pour la hauteur pour qu'il se base sur la hauteur de la "boite" dans laquelle il se trouve-->
         <ImageView
+            android:id="@+id/preview_image"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
@@ -34,19 +37,21 @@
     <!-- EditText est l'équivalent d'un input -->
     <!-- hint va afficher un texte qui est une sorte de suggestion -->
     <EditText
+        android:id="@+id/name_input"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:hint="@string/add_plant_page_name_input"
-        android:paddingLeft="@dimen/default_margin"
+        android:paddingLeft="@dimen/item_margin"
         android:layout_marginTop="@dimen/default_margin"
         style="@style/DefaultTextStyle"
         />
 
     <EditText
+        android:id="@+id/description_input"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:hint="@string/add_plant_page_description_input"
-        android:paddingLeft="@dimen/default_margin"
+        android:paddingLeft="@dimen/item_margin"
         android:layout_marginTop="@dimen/default_margin"
         style="@style/DefaultTextStyle"
         />
@@ -55,22 +60,25 @@
     <!-- entries pour définir les choix possibles -->
     <!-- Les styles pour les spinner sont gérés à un autre endroit (values -> themes) car ce ne sont pas des textview-->
     <Spinner
+        android:id="@+id/grow_spinner"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:entries="@array/add_plant_page_grow_spinner_input"
-        android:paddingLeft="@dimen/default_margin"
+        android:paddingLeft="@dimen/item_margin"
         android:layout_marginTop="@dimen/default_margin"
         />
 
     <Spinner
+        android:id="@+id/water_spinner"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:entries="@array/add_plant_page_water_spinner_input"
-        android:paddingLeft="@dimen/default_margin"
+        android:paddingLeft="@dimen/item_margin"
         android:layout_marginTop="@dimen/default_margin"
         />
 
     <Button
+        android:id="@+id/confirm_button"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:background="@color/darkGray"
