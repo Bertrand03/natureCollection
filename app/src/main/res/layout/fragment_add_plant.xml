@@ -2,6 +2,82 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/default_margin"
+    >
+
+    <!-- "Boite" qui va permettre de mettre le "Charger image" et la miniature à côté-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_plant_page_upload_button"
+            android:background="@color/green"
+            style="@style/TitleTextStyle"
+            android:textColor="@color/white"
+            android:padding="@dimen/default_margin"
+            />
+
+        <!-- On utilise un match parent pour la hauteur pour qu'il se base sur la hauteur de la "boite" dans laquelle il se trouve-->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/trending2"
+            />
+
+    </LinearLayout>
+
+    <!-- EditText est l'équivalent d'un input -->
+    <!-- hint va afficher un texte qui est une sorte de suggestion -->
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:hint="@string/add_plant_page_name_input"
+        android:paddingLeft="@dimen/default_margin"
+        android:layout_marginTop="@dimen/default_margin"
+        style="@style/DefaultTextStyle"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:hint="@string/add_plant_page_description_input"
+        android:paddingLeft="@dimen/default_margin"
+        android:layout_marginTop="@dimen/default_margin"
+        style="@style/DefaultTextStyle"
+        />
+
+    <!-- Sorte de menus déroulant avec choix -->
+    <!-- entries pour définir les choix possibles -->
+    <!-- Les styles pour les spinner sont gérés à un autre endroit (values -> themes) car ce ne sont pas des textview-->
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:entries="@array/add_plant_page_grow_spinner_input"
+        android:paddingLeft="@dimen/default_margin"
+        android:layout_marginTop="@dimen/default_margin"
+        />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:entries="@array/add_plant_page_water_spinner_input"
+        android:paddingLeft="@dimen/default_margin"
+        android:layout_marginTop="@dimen/default_margin"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/darkGray"
+        android:text="@string/add_plant_page_confirm_button"
+        android:textColor="@color/white"
+        android:textSize="24dp"
+        android:layout_marginTop="@dimen/default_margin"
+        />
 
 </LinearLayout>
