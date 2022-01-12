@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--Création de ce layout en mode LinearLayout car pas de contraintes à appliquer sur le fragment, on a un seul composant. tuto à 03:27:57 -->
+    <!--Le RecyclerView est utilisé pour lister nos items -->
+    <!-- On utilisera une classe (CollectionFragment) pour gérer ce fragment et l'injecter sur la page en question-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/collection_recycler_list"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>
