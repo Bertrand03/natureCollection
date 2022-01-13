@@ -1,16 +1,30 @@
 package fr.drako.naturecollection
 
+import android.net.Uri
+import com.google.android.gms.tasks.Continuation
+import com.google.android.gms.tasks.Task
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.UploadTask
 import fr.drako.naturecollection.PlantRepository.Singleton.databaseRef
 import fr.drako.naturecollection.PlantRepository.Singleton.plantList
+import fr.drako.naturecollection.PlantRepository.Singleton.storageReference
+import java.net.URI
+import java.util.*
 
 class PlantRepository {
 
     // Le Singleton va permettre de ne pas recréer un objet à chaque opération, il va réutiliser l'instance créée
     object Singleton {
+        // Donner le lien pour accéder au bucket (boite à images sur Firebase). Le lien est celui récupéré sur firebase dans notre Bucket
+        private val BUCKET_URL: String = "gs://naturecollection-eabeb.appspot.com"
+
+        // Se connecter à notre espace de stockage Storage sur Firebase
+        val storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(BUCKET_URL)
+
         // Se connecter à la référence "plants". On va chercher en bdd avec le nom de la table
         val databaseRef = FirebaseDatabase.getInstance().getReference("plants")
 
@@ -47,6 +61,38 @@ class PlantRepository {
             }
 
         })
+    }
+
+    // Créer une fonction pour envoyer des fichiers sur leur storage
+    // Uri puisque interne à notre application
+    fun uploadImage(file: Uri) {
+        // Vérifier que ce fichier n'est pas null
+        if (file != null) {
+            // Pour envoyer un fichier il faut déjà lui donner un nom. On prend un nom au hasard pour éviter les doublons
+            // UUID renvoyer un id unique sous la forme d'un texte grâce au toString()
+            val fileName = UUID.randomUUID().toString() + ".jpg"
+            // Permet de donner le chemin de l'endroit où on va enregistrer la ressource, l'endroit dans la base de données
+            val ref = storageReference.child(fileName)
+            // On lui associe qu'elle est le contenu à soumettre
+            val uploadTask = ref.putFile(file)
+
+            // Démarrer la tache d'envoi
+            // Continuation va permettre de passer le type de tache. tuto à 04:15:21
+            uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
+                // S'il y a eu un problème lors de l'envoi du fichier
+                if (!task.isSuccessful) {
+                    // Il y a un problème. it c'est l'exception. let permet d'envoyer cette exception
+                    task.exception?.let { throw it }
+                }
+                return@Continuation ref.downloadUrl
+            }).addOnCompleteListener { task ->
+                // Vérifier si tout a bien fonctionné
+                if (task.isSuccessful) {
+                    // On va récupérer l'image
+                    val downloadURI = task.result
+                }
+            }
+        }
     }
 
     // Mettre à jour un objet plante en bdd. Auparavant on aura attribué un id à chaque plante en base

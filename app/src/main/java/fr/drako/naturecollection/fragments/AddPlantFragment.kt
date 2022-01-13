@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import fr.drako.naturecollection.MainActivity
+import fr.drako.naturecollection.PlantRepository
 import fr.drako.naturecollection.R
 
 class AddPlantFragment(private val context: MainActivity): Fragment() {
@@ -68,6 +69,12 @@ class AddPlantFragment(private val context: MainActivity): Fragment() {
             // Toujours bien mettre le ? pour gérer le cas d'une valeur à null. Ici on va forcer pour attribuer la valeur de l'image sélectionnée tuto à 04:06:24.
 
             uploadedImage?.setImageURI(selectedImage)
+
+            // Heberger l'image sur le bucket
+            val repo = PlantRepository()
+            // Erreur sur selectedImage car il nous prévient que l'image peut être incorrect. Comme on a fait le contrôle en amont je peux bypasser ce controle en mettant "!!"
+            // On a fait ce controle dans la methode uploadImage du repository
+            repo.uploadImage(selectedImage!!)
         }
     }
 
