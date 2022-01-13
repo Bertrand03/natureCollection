@@ -66,7 +66,7 @@ class HomeFragment (private val context: MainActivity): Fragment() { // récupé
         // Récupérer le recyclerView - affichage horizontal
         // Le plantList était initialement utilisé pour les valeurs en dur mais maintenant on passe par le Singleton (Il faut bien penser à importer le plantList qui correspond au Singleton)
         val horizontalRecyclerView = view.findViewById<RecyclerView>(R.id.horizontal_recycler_view)
-        horizontalRecyclerView.adapter = PlantAdapter(context, plantList, R.layout.item_horizontal_plant) // On récupère le context pour charger les images via Glide
+        horizontalRecyclerView.adapter = PlantAdapter(context, plantList.filter { !it.liked }, R.layout.item_horizontal_plant) // On récupère le context pour charger les images via Glide
 
         // récupérer le second RecyclerView - affichage vertical
         val verticalRecyclerView = view.findViewById<RecyclerView>(R.id.vertical_recycler_view)
