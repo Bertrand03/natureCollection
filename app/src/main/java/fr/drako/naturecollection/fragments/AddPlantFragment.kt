@@ -2,20 +2,27 @@ package fr.drako.naturecollection.fragments
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import fr.drako.naturecollection.MainActivity
+import fr.drako.naturecollection.PlantModel
 import fr.drako.naturecollection.PlantRepository
+import fr.drako.naturecollection.PlantRepository.Singleton.downloadUri
 import fr.drako.naturecollection.R
+import java.util.*
 
 class AddPlantFragment(private val context: MainActivity): Fragment() {
     // val ça change pas de valeurs, var ça change de valeurs
     private var uploadedImage: ImageView? = null
+    private var file: Uri? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,8 +41,39 @@ class AddPlantFragment(private val context: MainActivity): Fragment() {
         // On lui associe une interaction, lorsqu'on clic dessus ça ouvre les images du téléphone
         pickupImageButton.setOnClickListener { pickupImage() }
 
+        // Récupérer le bouton confirmer, il faut le récupérer pour pouvoir intéragir avec lui
+        val confirmButton = view.findViewById<Button>(R.id.confirm_button)
+        confirmButton.setOnClickListener { sendForm(view) }
 
         return view
+    }
+
+    private fun sendForm(view: View) {
+        val repo = PlantRepository()
+        repo.uploadImage(file!!) {
+            // Info à vérifier mais le fait d'ouvrir les accolades ici c'est pour définir ce que le callback doit faire à la fin de la méthode uploadImage.
+            // Le but est de uploader l'image et par la suite récupérer toutes les valeurs des inputs (EditText) et Spinner (Menus déroulants)
+            val plantName = view.findViewById<EditText>(R.id.name_input).text.toString()
+            val plantDescription = view.findViewById<EditText>(R.id.description_input).text.toString()
+            // Pour les spinners on récupere bien la valeur dans le menu déroulant
+            val grow = view.findViewById<Spinner>(R.id.grow_spinner).selectedItem.toString()
+            val water = view.findViewById<Spinner>(R.id.water_spinner).selectedItem.toString()
+            val downloadImageUrl = downloadUri // On a pas besoin de faire un repo.downloadUri puisque downloadUri est un Singleton donc instancié une fois et utilisable partout
+
+            // Création d'un nouvel objet de type PlantModel pour l'envoyer en bdd
+            val plant = PlantModel(
+                UUID.randomUUID().toString(),
+                plantName,
+                plantDescription,
+                downloadImageUrl.toString(),
+                grow,
+                water
+            )
+            // Envoyer la plante en bdd
+            repo.insertPlant(plant)
+        }
+
+
     }
 
     private fun pickupImage() {
@@ -62,19 +100,15 @@ class AddPlantFragment(private val context: MainActivity): Fragment() {
             if (data == null || data.data == null) return
 
             // Si c'est valide on récupère l'image sélectionnée
-            val selectedImage = data.data
+            file = data.data
 
             // On met à jour l'aperçu de l'image miniature
             // uploadedImage étant initialisée à null
             // Toujours bien mettre le ? pour gérer le cas d'une valeur à null. Ici on va forcer pour attribuer la valeur de l'image sélectionnée tuto à 04:06:24.
 
-            uploadedImage?.setImageURI(selectedImage)
+            uploadedImage?.setImageURI(file)
 
-            // Heberger l'image sur le bucket
-            val repo = PlantRepository()
-            // Erreur sur selectedImage car il nous prévient que l'image peut être incorrect. Comme on a fait le contrôle en amont je peux bypasser ce controle en mettant "!!"
-            // On a fait ce controle dans la methode uploadImage du repository
-            repo.uploadImage(selectedImage!!)
+
         }
     }
 

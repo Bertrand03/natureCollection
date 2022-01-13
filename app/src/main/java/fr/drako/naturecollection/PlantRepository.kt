@@ -10,6 +10,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
 import fr.drako.naturecollection.PlantRepository.Singleton.databaseRef
+import fr.drako.naturecollection.PlantRepository.Singleton.downloadUri
 import fr.drako.naturecollection.PlantRepository.Singleton.plantList
 import fr.drako.naturecollection.PlantRepository.Singleton.storageReference
 import java.net.URI
@@ -30,6 +31,9 @@ class PlantRepository {
 
         // Créer une liste qui va contenir nos plantes
         val plantList = arrayListOf<PlantModel>()
+
+        // Va contenir le lien de l'image courante
+        var downloadUri : Uri? = null
     }
 
     // Le Unit est un paquet d'instructions. Le callback ... Unit sert à laisser le temps de faire la requête en base pour charger ensuite le fragment contenant les données
@@ -65,7 +69,8 @@ class PlantRepository {
 
     // Créer une fonction pour envoyer des fichiers sur leur storage
     // Uri puisque interne à notre application
-    fun uploadImage(file: Uri) {
+    fun uploadImage(file: Uri, callback: () -> Unit) {
+        // On utilise le call back pour lui donner une instruction après que l'image ait bien été uploadée
         // Vérifier que ce fichier n'est pas null
         if (file != null) {
             // Pour envoyer un fichier il faut déjà lui donner un nom. On prend un nom au hasard pour éviter les doublons
@@ -89,7 +94,8 @@ class PlantRepository {
                 // Vérifier si tout a bien fonctionné
                 if (task.isSuccessful) {
                     // On va récupérer l'image
-                    val downloadURI = task.result
+                    downloadUri = task.result
+                    callback()
                 }
             }
         }
@@ -98,6 +104,13 @@ class PlantRepository {
     // Mettre à jour un objet plante en bdd. Auparavant on aura attribué un id à chaque plante en base
     fun updatePlant(plant: PlantModel) {
         databaseRef.child(plant.id).setValue(plant)
+    }
+
+    // Insérer une nouvelle plante en bdd
+    fun insertPlant(plant: PlantModel) {
+        databaseRef.child(plant.id).setValue(plant)
+
+
     }
 
     // Supprimer une plante de la base. Après la suppression il y a un rafraichissement automatique (grace à Firebase ?)
